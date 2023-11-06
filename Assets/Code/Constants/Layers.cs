@@ -11,5 +11,6 @@ namespace Code.Constants
         public const int Hero = 6;
         public const int Bullet = 7;
         public const int Ground = 8;
+        public const int Enemy = 9;
     }
 }
