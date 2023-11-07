@@ -96,7 +96,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 5
-  RotationSpeed: 90
+  sensitivity: 0.6
+  smoothing: 2
   Animator: {fileID: 2156926469072119867}
 --- !u!136 &2234470360017844328
 CapsuleCollider:

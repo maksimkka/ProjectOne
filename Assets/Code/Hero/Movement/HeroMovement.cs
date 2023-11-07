@@ -8,10 +8,10 @@ namespace Code.Hero
     {
         [SerializeField]
         private float MoveSpeed;
-
         [SerializeField]
-        private float RotationSpeed;
-
+        public float sensitivity;
+        [SerializeField]
+        public float smoothing;
         [SerializeField]
         private Animator Animator;
         
@@ -19,45 +19,68 @@ namespace Code.Hero
 
         private readonly int runAnimation = Animator.StringToHash("Running");
         private readonly int dynIdleAnimation = Animator.StringToHash("DynIdle");
+        
+        private Vector2 mouseLook;
+        private Vector2 smoothV;
+        private bool isMoveVertical;
+        private bool isMoveHorizontal;
 
         private void Awake()
         {
             animationSwitcher = new AnimationSwitcher(Animator);
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
         void Update()
         {
             HeroMove();
+            HeroMoveHorizontal();
             HeroRotate();
+            PlayRunAnimation();
         }
 
         private void HeroMove()
         {
             var move = Input.GetAxis("Vertical");
-
-            PlayRunAnimation(move);
+            isMoveVertical = false;
             if (move == 0) return;
-
-        
+            
             transform.Translate(new Vector3(0f, 0f, move * MoveSpeed * Time.deltaTime));
+            isMoveVertical = true;
+        }
+
+        private void HeroMoveHorizontal()
+        {
+            var move = Input.GetAxis("Horizontal");
+            isMoveHorizontal = false;
+            PlayRunAnimation();
+            if (move == 0) return;
+            isMoveHorizontal = true;
+            transform.Translate(new Vector3(move * MoveSpeed * Time.deltaTime, 0f, 0));
         }
 
         private void HeroRotate()
         {
-            var rotate = Input.GetAxis("Horizontal");
-            if (rotate == 0) return;
+            var mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
-            transform.Rotate(new Vector3(0f, rotate * RotationSpeed * Time.deltaTime, 0f));
+            mouseDelta = Vector2.Scale(mouseDelta, new Vector2(sensitivity * smoothing, sensitivity * smoothing));
+            smoothV.x = Mathf.Lerp(smoothV.x, mouseDelta.x, 1f / smoothing);
+            smoothV.y = Mathf.Lerp(smoothV.y, mouseDelta.y, 1f / smoothing);
+            mouseLook += smoothV;
+            mouseLook.y = Mathf.Clamp(mouseLook.y, -90f, 90f);
+
+            //transform.localRotation = Quaternion.AngleAxis(-mouseLook.y, Vector3.right);
+            transform.localRotation = Quaternion.AngleAxis(mouseLook.x, transform.up);
         }
 
-        private void PlayRunAnimation(float move)
+        private void PlayRunAnimation()
         {
-            if (move != 0)
+            if (isMoveVertical || isMoveHorizontal)
             {
                 animationSwitcher.PlayAnimation(runAnimation);
             }
 
-            else
+            else if(!isMoveVertical && !isMoveHorizontal)
             {
                 animationSwitcher.PlayAnimation(dynIdleAnimation);
             }
