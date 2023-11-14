@@ -12,5 +12,7 @@ namespace Code.Constants
         public const int Bullet = 7;
         public const int Ground = 8;
         public const int Enemy = 9;
+        public const int Wall = 10;
+        public const int BaseGround = 11;
     }
 }

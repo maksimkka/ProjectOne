@@ -81,8 +81,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af18969c7c264856bda5d7be2a0bacba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NavMesh: {fileID: 5955291241215117141}
-  Animator: {fileID: 865719897745504461}
+  navMeshAgent: {fileID: 5955291241215117141}
+  animator: {fileID: 865719897745504461}
 --- !u!114 &858747087597872903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -627,7 +627,7 @@ Animator:
   m_GameObject: {fileID: 5643179348028572309}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 34c552fbe8b264306b616377a5d71065, type: 2}
+  m_Controller: {fileID: 9100000, guid: acd711e890eea5c41b8fd534aa28f56b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

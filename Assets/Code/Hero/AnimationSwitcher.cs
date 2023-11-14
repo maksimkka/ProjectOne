@@ -31,7 +31,7 @@ namespace Code.Animations
             //     await UniTask.Yield(cancellationToken: _tokenSources.Token);
             // }
 
-            PlayAnimation(hashFirstAnimation);
+            //PlayAnimation(hashFirstAnimation);
         }
         
         

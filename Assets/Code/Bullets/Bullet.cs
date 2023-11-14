@@ -23,7 +23,7 @@ namespace Code.Bullets
 
         private void OnCollisionEnter(Collision other)
         {
-            if (other.gameObject.layer == Layers.Ground)
+            if (other.gameObject.layer == Layers.Wall)
             {
                 Destroy(gameObject);
             }

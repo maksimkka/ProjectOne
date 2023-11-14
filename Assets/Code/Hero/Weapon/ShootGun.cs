@@ -11,6 +11,7 @@ namespace Code.Weapon
 
         void Update()
         {
+            if(Time.timeScale == 0) return;
             if (Input.GetMouseButtonDown(0))
             {
                 var bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity);

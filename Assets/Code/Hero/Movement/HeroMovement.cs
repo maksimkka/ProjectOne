@@ -28,11 +28,11 @@ namespace Code.Hero
         private void Awake()
         {
             animationSwitcher = new AnimationSwitcher(Animator);
-            Cursor.lockState = CursorLockMode.Locked;
         }
 
         void Update()
         {
+            if(Time.timeScale == 0) return;
             HeroMove();
             HeroMoveHorizontal();
             HeroRotate();
