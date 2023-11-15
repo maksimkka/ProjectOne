@@ -5,6 +5,7 @@ namespace Code.HUD
     public static class ScreenSwitcher
     {
         private static List<ScreenView> screens;
+        private static ScreenType currentScreenType;
 
         public static void Initialize(List<ScreenView> screenList)
         {
@@ -25,6 +26,20 @@ namespace Code.HUD
                     screens[i].gameObject.SetActive(false);
                 }
             }
+        }
+
+        public static ScreenType GetCurrentScreen()
+        {
+            foreach (var screen in screens)
+            {
+                if (screen.gameObject.activeSelf)
+                {
+                    currentScreenType = screen.type;
+                    break;
+                }
+            }
+
+            return currentScreenType;
         }
 
         public static void HideAllScreens()

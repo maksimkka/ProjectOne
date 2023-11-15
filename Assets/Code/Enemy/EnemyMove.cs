@@ -49,7 +49,7 @@ namespace Code.Enemy
         private void Move()
         {
             if(isHeroOnBase) return;
-            navMeshAgent.SetDestination(targetMove.transform.position);
+            navMeshAgent.SetDestination(targetMove.position);
         }
         private void ChangeState(bool isHeroBase)
         {
