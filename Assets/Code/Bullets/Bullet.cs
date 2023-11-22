@@ -27,6 +27,11 @@ namespace Code.Bullets
             {
                 Destroy(gameObject);
             }
+
+            else if (other.gameObject.layer == Layers.Enemy)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
